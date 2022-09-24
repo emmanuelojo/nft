@@ -21,6 +21,14 @@ module.exports = {
         "n-blue-gradient-sm":
           'url("https://opensea.io/static/images/magellan-gradient-light-sm.png")',
       },
+      gridTemplateColumns: {
+        "n-20-fr": "repeat(20,1fr)",
+        "n-14": "repeat(14,minmax(86px,1fr))",
+        "n-10": "repeat(10,minmax(86px,1fr))",
+        "n-10-fr": "repeat(10,1fr)",
+        "n-8-fr": "repeat(8,1fr)",
+        "n-4-fr": "repeat(4,1fr)",
+      },
     },
   },
   plugins: [],

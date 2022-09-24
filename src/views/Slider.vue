@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, Ref } from "vue";
+import { scrollLeft, scrollRight } from "../utils/helpers";
+
+const slideContainer = ref() as Ref<HTMLDivElement>;
 
 const activeSlide = ref(0);
 
@@ -76,6 +79,14 @@ setInterval(() => {
   activeSlide.value++;
   if (activeSlide.value === 4) activeSlide.value = 0;
 }, 10000);
+
+// setInterval(() => {
+//   scrollRight(slideContainer.value, 1376);
+// }, 3000);
+
+// setInterval(() => {
+//   scrollLeft(slideContainer.value, 1376);
+// }, 5000);
 </script>
 
 <template>
@@ -87,7 +98,7 @@ setInterval(() => {
     </h1>
     <div>
       <div
-        class="mx-auto h-[328px] w-[90%] flex items-baseline relative rounded-lg"
+        class="mx-auto h-[328px] w-[90%] flex md:hidden items-baseline relative rounded-lg"
       >
         <img
           :src="slideArray[activeSlide].image"
@@ -120,6 +131,60 @@ setInterval(() => {
           <p class="text-xs text-white font-medium">
             Floor: {{ slideArray[activeSlide].price }}
           </p>
+        </div>
+      </div>
+
+      <div
+        class="mx-auto h-[328px] w-full hidden md:flex items-baseline relative rounded-lg"
+      >
+        <div
+          class="w-full px-2 absolute top-1/2 -mt-5 flex justify-between items-center"
+        >
+          <div
+            @click="scrollLeft(slideContainer, 1376)"
+            class="w-14 h-14 z-50 flex justify-center items-center rounded-full shadow-md hover:shadow-lg bg-white text-black cursor-pointer"
+          >
+            <span class="material-symbols-outlined text-3xl">
+              navigate_before
+            </span>
+          </div>
+
+          <div
+            @click="scrollRight(slideContainer, 1376)"
+            class="w-14 h-14 z-50 flex justify-center items-center rounded-full shadow-md hover:shadow-lg bg-white text-black cursor-pointer"
+          >
+            <span class="material-symbols-outlined text-3xl">
+              navigate_next
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="grid grid-cols-n-8-fr gap-4 overflow-auto hide-scrollbar w-[1360px] 2xl:w-[1440px] mx-auto"
+          ref="slideContainer"
+        >
+          <div
+            v-for="(product, idx) in slideArray"
+            :key="idx"
+            class="w-[328px] h-[328px] flex flex-grow rounded-2xl overflow-hidden cursor-pointer relative"
+          >
+            <div>
+              <img
+                :src="product.image"
+                alt="image"
+                class="h-full w-[328px] rounded-2xl object-cover hover:scale-105 transition delay-150 duration-300 ease-in"
+              />
+
+              <div class="absolute left-3 bottom-3">
+                <p class="text-white font-semibold">
+                  {{ product.name }}
+                </p>
+                <p class="text-xs text-white font-medium">
+                  Floor: {{ product.price }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

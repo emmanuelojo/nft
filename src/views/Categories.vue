@@ -44,7 +44,7 @@ const categories = [
 
 <template>
   <div
-    class="mt-10 p-4 grid gap-5 2xl:max-w-[1024px] lg:flex lg:flex-col 2xl:mx-auto"
+    class="mt-10 p-4 md:px-6 lg:px-10 grid gap-5 2xl:max-w-[1024px] lg:flex lg:flex-col 2xl:mx-auto"
   >
     <h1 class="text-n-black text-xl font-bold">Browse by category</h1>
 

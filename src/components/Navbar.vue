@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { onBeforeMount, onMounted, ref } from "vue";
 
-onBeforeMount(() => {
+onMounted(() => {
   window.addEventListener("scroll", handleScroll);
 });
 
-onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
+interface Props {
+  topOfPage: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  topOfPage: true,
 });
 
 const topOfPage = ref(true);
@@ -24,18 +28,8 @@ const handleScroll = () => {
 </script>
 
 <template>
-  <!-- <nav
-    class="px-4 w-full h-[72px] flex justify-between items-center gap-8 fixed"
-    style="z-index: 1"
-    :class="[
-      { onScroll: !topOfPage },
-      topOfPage
-        ? 'border-b bg-n-blue-gradient-sm md:bg-n-blue-gradient'
-        : 'bg-white border-b-2 border-b-green-500',
-    ]"
-  > -->
   <nav
-    class="px-4 w-full h-[72px] flex justify-between items-center gap-8 fixed bg-white border-b"
+    class="px-4 w-full h-[72px] flex justify-between items-center gap-8 fixed"
     style="z-index: 1"
   >
     <div class="flex items-center gap-2">
@@ -48,32 +42,34 @@ const handleScroll = () => {
     </div>
 
     <div
-      class="hidden md:flex p-2 border rounded-xl bg-transparent flex-grow items-center"
+      class="hidden md:flex p-2 border bg-transparent rounded-xl flex-grow items-center"
     >
+      <!-- 
+      :class="topOfPage ? 'bg-n-gray' : 'bg-transparent'" -->
       <span class="material-symbols-outlined text-n-gray text-[32px]">
         search
       </span>
       <input
         type="text"
         placeholder="Search items, collections, and accounts"
-        class="border-none outline-none bg-transparent placeholder:text-n-gray w-full"
+        class="border-none bg-transparent outline-none placeholder:text-n-gray w-full"
       />
     </div>
 
-    <div class="hidden lg:flex items-center gap-5">
+    <div class="hidden lg:flex items-center gap-[35px]">
       <p class="text-n-black font-bold">Explore</p>
       <p class="text-n-black font-bold">Stats</p>
       <p class="text-n-black font-bold">Resources</p>
       <p class="text-n-black font-bold">Create</p>
 
       <div>
-        <span class="material-symbols-outlined text-n-black">
+        <span class="material-symbols-outlined text-n-black lg:text-3xl">
           account_circle
         </span>
       </div>
 
       <div>
-        <span class="material-symbols-outlined text-n-black">
+        <span class="material-symbols-outlined text-n-black lg:text-3xl">
           account_balance_wallet
         </span>
       </div>

@@ -96,7 +96,7 @@ const nfts = [
 </script>
 
 <template>
-  <div class="px-4 mt-10">
+  <div class="px-4 md:px-6 lg:px-10 mt-10">
     <div
       class="w-full flex justify-between items-center gap-4 border-b-[0.1px] border-b-gray-400"
     >
@@ -145,7 +145,48 @@ const nfts = [
         <div
           v-for="(product, idx) in nfts.slice(-5)"
           :key="idx"
-          class="flex items-center gap-3 sm:gap-6"
+          class="flex lg:hidden items-center gap-3 sm:gap-6"
+        >
+          <p class="text-sm text-n-gray font-bold sm:text-xl">{{ idx + 1 }}</p>
+
+          <div class="flex flex-grow justify-between items-center">
+            <div class="flex items-center gap-2 sm:gap-3">
+              <img
+                :src="product.image"
+                alt="image"
+                class="text-[9px] h-[52px] w-[52px] object-cover rounded-lg"
+              />
+
+              <div>
+                <div class="flex items-center gap-1">
+                  <p class="capitalize font-bold">{{ product.name }}</p>
+                  <span
+                    v-if="product.verified"
+                    class="material-symbols-outlined text-blue-500"
+                  >
+                    verified
+                  </span>
+                </div>
+                <p class="text-xs flex items-center text-n-gray">
+                  <span class="font-medium">Floor:</span>
+                  <span class="font-bold"> {{ product.price }}</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <p class="text-sm font-bold">{{ product.stock }}</p>
+              <p class="text-xs text-n-green font-bold">
+                {{ product.percentage }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          v-for="(product, idx) in nfts"
+          :key="idx"
+          class="hidden lg:flex items-center gap-3 sm:gap-6"
         >
           <p class="text-sm text-n-gray font-bold sm:text-xl">{{ idx + 1 }}</p>
 
